@@ -1,0 +1,51 @@
+<footer class="bg-light pt-5 pb-4">
+  <div class="container">
+    <!-- Logo & Tagline -->
+    <div class="text-center mb-4">
+      <h5>
+        <strong><a href="{{ metadata.url }}" class="text-dark text-decoration-none">{{ metadata.title }}</a></strong>
+      </h5>
+      <p class="text-muted small">
+        Handpicked home decor & lifestyle products for UAE homes.<br>
+        Curated with care, delivered via Amazon.ae.
+      </p>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="row justify-content-center mb-4 gx-4">
+      {%- for entry in collections.all | eleventyNavigation %}
+        <div class="col-auto">
+          <a href="{{ entry.url | url }}" class="text-decoration-none text-dark small">
+            {{ entry.title }}
+          </a>
+        </div>
+      {%- endfor %}
+    </div>
+
+<!-- Social Media & Amazon Icons -->
+<div class="text-center mt-4">
+  <p class="small text-muted mb-2">Follow Us & Shop</p>
+  <div class="d-flex justify-content-center" style="gap: 20px; font-size: 1.4em;">
+    <a href="https://www.instagram.com/nillianstore" target="_blank" rel="noopener" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/share/17DyggcD7b/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://www.tiktok.com/@nillianstore" target="_blank" rel="noopener" aria-label="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="mailto:nillianstore@gmail.com" target="_blank" rel="noopener" aria-label="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <!-- Amazon Storefront -->
+    <a href="https://www.amazon.ae/s?me=A20X6G0BNN7WDJ&marketplaceID=A2VIGQ35RCS4UG" target="_blank" rel="noopener" aria-label="Shop on Amazon.ae">
+      <i class="fab fa-amazon"></i>
+    </a>
+  </div>
+</div>
+
+  </div>
+</footer>
+
+{% include "widget/script.njk" %}

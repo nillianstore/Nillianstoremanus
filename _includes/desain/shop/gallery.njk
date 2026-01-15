@@ -1,0 +1,31 @@
+<div class="product-gallery my-4">
+  {% if images and images.length > 1 %}
+    <!-- Swiper Carousel for Multiple Images -->
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {% for img in images %}
+          <div class="swiper-slide d-flex justify-content-center">
+            {% image "." + img, title + " - Image " + loop.index, "(min-width: 768px) 50vw, 100vw" %}
+          </div>
+        {% endfor %}
+      </div>
+      <!-- Navigation Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <!-- Pagination Dots -->
+      <div class="swiper-pagination"></div>
+    </div>
+  {% elif images and images.length == 1 %}
+    <!-- Single Image -->
+    <div class="text-center">
+      {% image "." + images[0], title, "(min-width: 768px) 50vw, 100vw" %}
+    </div>
+  {% elif cover %}
+    <!-- Fallback to old 'cover' field -->
+    <div class="text-center">
+      {% image "." + cover, title, "(min-width: 768px) 50vw, 100vw" %}
+    </div>
+  {% else %}
+    <p class="text-muted">No image available</p>
+  {% endif %}
+</div>

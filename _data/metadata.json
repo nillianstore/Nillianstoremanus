@@ -1,0 +1,26 @@
+{
+  "title": "Nillianstore",
+  "description": "Handpicked home decor & lifestyle products for UAE homes. Curated with care, delivered via Amazon.ae.",
+  "url": "https://www.nillianstore.com",
+  "shopname": "Shop",
+  "banner": "/img/B0FJ7K4G48.webp",
+  "language": "en",
+  "locale": "en_AE",
+  "tweet": "@nillianstore",
+  "icon": "/img/eleventy.png",
+  "feed": {
+    "subtitle": "Curated home decor & tea accessories for UAE homes",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "id": "https://www.nillianstore.com/feed/feed.xml"
+  },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://www.nillianstore.com/feed/feed.json"
+  },
+  "author": {
+    "name": "Nillianstore",
+    "email": "nillianstore@gmail.com",
+    "url": "https://www.nillianstore.com"
+  }
+}

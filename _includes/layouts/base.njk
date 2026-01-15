@@ -1,0 +1,61 @@
+{% include "widget/head.njk" %}
+{% include "widget/navbar.njk" %}
+{% include "widget/content.njk" %}
+{% include "widget/footer.njk" %}
+
+<!-- Client-Side Search Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const resultsBox = document.getElementById("search-results");
+
+    let products = [];
+
+    // Load products.json (generated from your feed/products.json.njk)
+    fetch("/products.json")
+      .then(response => response.json())
+      .then(data => {
+        products = data.products || [];
+      })
+      .catch(err => console.error("Failed to load /products.json", err));
+
+    // Handle typing in the search box
+    searchInput.addEventListener("input", function () {
+      const term = this.value.trim().toLowerCase();
+      
+      // Hide results if input is empty or too short
+      if (!term || term.length < 2) {
+        resultsBox.classList.add("d-none");
+        return;
+      }
+
+      // Filter products by title and description
+      const matches = products.filter(p =>
+        p.title.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term)
+      );
+
+      // Show results
+      if (matches.length === 0) {
+        resultsBox.innerHTML = '<div class="p-2 text-muted small">No products found</div>';
+      } else {
+        resultsBox.innerHTML = matches.map(p => `
+          <a href="${p.link}" class="dropdown-item p-2 text-dark text-decoration-none border-bottom">
+            <strong>${p.title}</strong><br/>
+            <small class="text-muted">${p.description.substring(0, 80)}...</small><br/>
+            <small class="text-primary">${p.price}</small>
+          </a>
+        `).join('');
+      }
+
+      resultsBox.classList.remove("d-none");
+    });
+
+    // Hide results when clicking outside
+    document.addEventListener("click", function (e) {
+      if (!resultsBox.contains(e.target) && e.target !== searchInput) {
+        resultsBox.classList.add("d-none");
+      }
+    });
+  });
+</script>

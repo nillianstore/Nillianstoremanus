@@ -1,0 +1,71 @@
+---
+layout: layouts/home.njk
+eleventyNavigation:
+  key: Home
+  order: 1
+---
+<!-- Animated CTA Banner -->
+<div class="text-center my-5">
+  <h2 class="mb-4">Shop Handpicked gifts Curated for UAE Homes Delivered by Amazon</h2>
+  <div class="cta-video-wrapper" style="width: 100%; display: flex; justify-content: center;">
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline 
+      class="img-fluid rounded cta-video" 
+      style="width: 100%; max-width: 1200px; border-radius: 1rem; display: block;"
+    >
+      <source src="/videos/CTAdesktop.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <a href="/shop/" class="btn btn-light btn-lg mt-3 px-5" style="font-weight: 600; display: inline-block;">
+    Shop All Products
+  </a>
+</div>
+<style>
+  .cta-video-wrapper {
+    width: 100%;
+  }
+  .cta-video {
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    border-radius: 1rem;
+    aspect-ratio: 16 / 9;
+    /* Prevent layout shift for images inside video wrapper, if any */
+    display: block;
+  }
+  @media (max-width: 767px) {
+    .cta-video {
+      max-width: 100vw;
+      border-radius: 0.75rem;
+      aspect-ratio: 9 / 16;
+    }
+    .cta-video-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+</style>
+<script>
+  // Swap video source based on screen width
+  document.addEventListener('DOMContentLoaded', function() {
+    var video = document.querySelector('.cta-video');
+    if (!video) return;
+    var source = video.querySelector('source');
+    if (window.innerWidth < 768) {
+      source.setAttribute('src', '/videos/CTAmobile.mp4');
+    } else {
+      source.setAttribute('src', '/videos/CTAdesktop.mp4');
+    }
+    video.load();
+  });
+</script>
+<!-- End Animated CTA Banner -->
+{% include "desain/home/header.njk" %}
+{% include "desain/home/shop.njk" %}
+{% include "desain/home/blog.njk" %}
+<div class="embedsocial-hashtag" data-ref="da6096c657b7d7b3f9869163a1306690d410d2b9"> <a class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial"> <div class="es-widget-branding-text">Instagram widget</div> </a> </div> <script> (function(d, s, id) { var js; if (d.getElementById(id)) {return;} js = d.createElement(s); js.id = id; js.src = "https://embedsocial.com/cdn/ht.js"; d.getElementsByTagName("head")[0].appendChild(js); }(document, "script", "EmbedSocialHashtagScript")); </script>
+{% include "widget/contact.njk" %}

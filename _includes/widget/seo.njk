@@ -1,0 +1,94 @@
+<title>{{ title or metadata.title }}</title>
+
+<!-- Meta Descriptions -->
+<meta name="description" content="{{ description or metadata.description }}">  
+<meta property="twitter:description" content="{{ description or metadata.description }}">
+<meta property="og:description" content="{{ description or metadata.description }}">
+
+<!-- Open Graph / Social -->
+<meta property="og:title" content="{{ title or metadata.title }}">
+<meta property="og:site_name" content="{{ metadata.title }}">
+
+{%- set ogType = "website" -%}
+{%- if tags and "shop" in tags -%}
+  {%- set ogType = "product" -%}
+{%- elif tags and ("post" in tags or "blog" in tags) -%}
+  {%- set ogType = "article" -%}
+{%- endif -%}
+
+<meta property="og:type" content="{{ ogType }}">
+<meta property="og:locale" content="{{metadata.locale}}">
+<meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
+<meta property="og:image" content="{{ site.url }}{{ cover or metadata.banner }}">
+
+<!-- Twitter -->
+<meta property="twitter:title" content="{{ title or metadata.title }}">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:site" content="{{metadata.tweet}}">
+<meta property="twitter:creator" content="{{metadata.tweet}}">
+<meta property="twitter:url" content="{{ site.url }}{{ page.url | url }}">
+<meta property="twitter:image" content="{{ site.url }}{{ cover or metadata.banner }}">
+<meta property="twitter:image:alt" content="{{ title or metadata.title }}">
+
+<!-- Facebook -->
+<meta property="facebook:title" content="{{ title or metadata.title }}">
+<meta property="facebook:image" content="{{ site.url }}{{ cover or metadata.banner }}">
+
+<!-- Robots -->
+<meta content='index, follow' name='robots'/>
+
+<!-- Google Site Verification -->
+<meta name="google-site-verification" content="WH5yK5pEky5qND2FOW3_hvm3VlPkjRtV731y81BcsTc" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ site.url }}{{ page.url | url }}" />
+
+<!-- Schema.org Structured Data -->
+{% if tags and "shop" in tags %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ title }}",
+  "image": ["{{ site.url }}{{ cover }}"],
+  "description": "{{ description | sanitize }}",
+  "sku": "{{ ecwidId }}",
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ site.url }}{{ page.url | url }}",
+    "priceCurrency": "AED",
+    "price": {{ price | replace('AED', '') | replace(' ', '') | default(0) }},
+    "priceValidUntil": "2026-12-31",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ metadata.title }}",
+      "url": "{{ site.url }}"
+    }
+  }
+}
+</script>
+{% elif tags and ("post" in tags or "blog" in tags) %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title }}",
+  "image": "{{ site.url }}{{ cover }}",
+  "datePublished": "{{ page.date | htmlDateString }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ metadata.author.name }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ metadata.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}{{ metadata.icon }}"
+    }
+  },
+  "description": "{{ description | sanitize }}"
+}
+</script>
+{% endif %}

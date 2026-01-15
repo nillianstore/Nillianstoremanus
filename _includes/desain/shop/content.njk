@@ -1,0 +1,81 @@
+<article class="container py-5">
+  <!-- 1. Product Title -->
+  <h1 class="mb-2">{{ title }}</h1>
+
+  <!-- 2. Description -->
+  <p class="lead mb-4">{{ description }}</p>
+
+  <!-- 3. Cover Photo (Left) + Features, Price & CTA (Right) -->
+  <div class="row align-items-start mb-5">
+    <!-- Left: Cover Image -->
+    <div class="col-md-6">
+      {% if cover %}
+        {% image "." + cover, title + " - Main Image", "(min-width: 768px) 50vw, 100vw" %}
+      {% else %}
+        <p class="text-muted">No image available</p>
+      {% endif %}
+    </div>
+
+    <!-- Right: Features + Price + CTA -->
+    <div class="col-md-6">
+      <!-- Features List -->
+      <ul class="list-unstyled small mb-3">
+        <li><strong>Features:</strong></li>
+        {% for point in bullet_points %}
+          <li class="mb-1">✓ {{ point }}</li>
+        {% endfor %}
+      </ul>
+
+      <!-- Price -->
+      <p class="h4 text-primary mb-3">{{ price }}</p>
+
+      <!-- Buy Button -->
+      <a
+        href="{{ amazonLink }}"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-lg px-4 w-100"
+        style="background: #ff9900; color: #000; border: none; font-weight: 600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart me-2" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H15.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13.991 12H4.5a.5.5 0 0 1-.491-.408L3.1 6.379 1.485 1.5H.5a.5.5 0 0 1-.5-.5z"/>
+          <path d="M4 14a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V5H4v9z"/>
+        </svg>
+        Buy on Amazon.ae
+      </a>
+      <p class="text-muted mt-2 small text-center">
+        Ships from Amazon.ae • Fast UAE delivery • Easy returns
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Tags Line (White Text, Black Background) -->
+<div class="mb-4 p-2 bg-dark text-white rounded d-inline-flex flex-wrap" style="gap: 0.5rem;">
+  {% for tag in tags %}
+    <a
+      href="/tags/{{ tag | slug }}/"
+      class="text-white text-decoration-none px-2 py-1"
+      style="font-size: 0.9rem; border-radius: 6px;"
+    >
+      #{{ tag }}
+    </a>
+  {% endfor %}
+</div>
+
+  <!-- 5. Gallery (if multiple images) -->
+  {% if images and images.length > 1 %}
+    <div class="my-5">
+      <h3>More Views</h3>
+      {% include "desain/shop/gallery.njk" %}
+    </div>
+  {% endif %}
+
+  <!-- 6. Remaining Content (Why You'll Love It, How to Apply, etc.) -->
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+      {{ content | safe }}
+    </div>
+  </div>
+
+    <!-- Previous / Next Navigation -->
+  {% include "desain/shop/nav.njk" %}
+</article>

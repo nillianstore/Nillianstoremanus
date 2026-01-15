@@ -1,0 +1,3 @@
+{% set shopslist = collections.shops | sort(false, false, "date") | reverse %}
+{% set shopslistCounter = shopslist.length %}
+{% include "desain/shop/shopslist.njk" %}

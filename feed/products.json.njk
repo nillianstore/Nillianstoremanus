@@ -1,0 +1,17 @@
+---
+permalink: /products.json
+eleventyExcludeFromCollections: true
+---
+{
+  "products": [
+    {%- for item in collections.shop %}
+      {
+        "title": "{{ item.data.title }}",
+        "description": "{{ item.data.description | striptags | xmlEncode }}",
+        "image": "{{ site.url }}{{ item.data.cover }}",
+        "price": "{{ item.data.price }}",
+        "link": "{{ site.url }}{{ item.url | url }}"
+      }{%- if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}

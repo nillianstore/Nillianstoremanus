@@ -1,0 +1,25 @@
+a {
+    text-decoration: none;
+      color: black;
+      }
+      .tag {
+        font-size: 10px;
+        }
+        .black {
+          background-color: black;
+          }
+          /* Constrain blog post images to max 600px, but stay responsive */
+.col-md-6 img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  width: auto;
+}
+
+/* On larger screens, cap at 600px */
+@media (min-width: 768px) {
+  .col-md-6 img {
+    max-width: 600px;
+  }
+}

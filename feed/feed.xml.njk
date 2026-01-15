@@ -1,0 +1,63 @@
+---
+permalink: /feed/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.feed.subtitle }}</subtitle>
+  <link href="{{ site.url }}/feed/feed.xml" rel="self"/>
+  <link href="{{ site.url }}"/>
+  <updated>{{ "now" | htmlDateString }}T00:00:00Z</updated>
+  <id>{{ site.url }}/feed/feed.xml</id>
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+
+  {%- for post in collections.posts | reverse %}
+  {%- if not post.data.draft %}
+  <entry>
+  <title>{{ item.data.title }}</title>
+  <link href="{{ site.url }}{{ item.url | url }}"/>
+  <id>{{ site.url }}{{ item.url | url }}</id>
+  <updated>{{ item.date | htmlDateString }}T00:00:00Z</updated>
+  <content type="html">{{ item.data.description | striptags | xmlEncode }}</content>
+  {%- if item.data.cover %}
+  <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ site.url }}{{ item.data.cover }}"/>
+  {%- endif %}
+  {%- if item.data.price %}
+  <price>{{ item.data.price }}</price>
+  {%- endif %}
+  <availability>in_stock</availability>
+  <brand>Nillianstore</brand>
+  {%- if item.data.ecwidId %}
+  <g:id>{{ item.data.ecwidId }}</g:id>
+  {%- endif %}
+  <category>product</category>
+</entry>
+  {%- endif %}
+  {%- endfor %}
+
+  {%- for item in collections.shop | reverse %}
+  {%- if not item.data.draft %}
+  <entry>
+    <title>{{ item.data.title }}</title>
+    <link href="{{ site.url }}{{ item.url | url }}"/>
+    <id>{{ site.url }}{{ item.url | url }}</id>
+    <updated>{{ item.date | htmlDateString }}T00:00:00Z</updated>
+    <content type="html">{{ item.data.description | striptags | xmlEncode }}</content>
+    {%- if item.data.cover %}
+    <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ site.url }}{{ item.data.cover }}"/>
+    {%- endif %}
+    {%- if item.data.price %}
+    <price>{{ item.data.price }}</price>
+    {%- endif %}
+    {%- if item.data.amazonLink %}
+    <amazonLink>{{ item.data.amazonLink }}</amazonLink>
+    {%- endif %}
+    <category>product</category>
+  </entry>
+  {%- endif %}
+{%- endfor %}
+</feed>
